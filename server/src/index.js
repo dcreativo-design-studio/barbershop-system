@@ -29,7 +29,7 @@ const app = express();
 
 // Configurazione CORS dinamica basata sull'ambiente
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'https://barbershop.dcreativo.ch',
+  origin: process.env.FRONTEND_URL || 'https:/yourstyle.dcreativo.ch',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: [
@@ -92,7 +92,7 @@ app.get('/', (req, res) => {
       services: '/api/services',
       contact: '/api/contact'  // Aggiunto nuovo endpoint
     },
-    docs: 'https://docs.barbershop.dcreativo.ch'
+    docs: 'https://docs.yourstyle.dcreativo.ch'
   });
 });
 
