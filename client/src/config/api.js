@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 // Configurazione base per le richieste API
-// Modificare il file api.js nel tuo frontend
-export const API_BASE_URL = 'https://api.yourstyle.dcreativo.ch/api';
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://api.yourstyle.dcreativo.ch/api';
 
 // Configurazione di base di axios
 const axiosInstance = axios.create({
