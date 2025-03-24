@@ -249,3 +249,5 @@ testCloudinaryConnection()
   });
 
 startServer();
+
+export default app;
