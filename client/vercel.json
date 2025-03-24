@@ -3,6 +3,6 @@
     { "source": "/(.*)", "destination": "/" }
   ],
   "env": {
-    "VITE_API_URL": "https://api.yourstyle.dcreativo.ch"
+    "VITE_API_URL": "https://api.barbershop.dcreativo.ch"
   }
 }
