@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@shadcn/ui": "^0.0.4"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0"
+  }
+}

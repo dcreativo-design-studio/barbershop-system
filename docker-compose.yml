@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - client
+      - server
+
+  client:
+    build: ./client
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=https://api.barbershop.dcreativo.ch
+    depends_on:
+      - server
+
+  server:
+    build: ./server
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=mongodb://127.0.0.1:27017/yourstylebarber
+      - JWT_SECRET=fc5f7d7fa59f5bafe2fa79fe2414142665ab6e3b2c0df2dabc860cbfc172699e
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=465
+      - SMTP_USER=timm81379@gmail.com
+      - SMTP_PASSWORD=bkzq fzwd jegt gvwy
+      - BARBER_EMAIL=info@dcreativo.ch

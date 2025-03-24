@@ -1,0 +1,732 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg-primary: theme('colors.gray.900');
+  --bg-secondary: theme('colors.gray.800');
+  --text-primary: theme('colors.white');
+  --accent: theme('colors.cyan.400');
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+  --bg-primary: theme('colors.white');
+  --bg-secondary: theme('colors.gray.100');
+  --text-primary: theme('colors.gray.900');
+  --accent: theme('colors.cyan.600');
+}
+
+.theme-transition {
+  @apply transition-all duration-200;
+}
+
+/* Animazioni base */
+@keyframes slideIn {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Nuova animazione per il messaggio di cambio password */
+@keyframes fadeInSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Classi di animazione */
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-bounce-custom {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.animate-spin-custom {
+  animation: spin 1s linear infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-fadeInSlideDown {
+  animation: fadeInSlideDown 0.3s ease-out forwards;
+}
+
+/* Notifiche e messaggi di stato per il profilo barbiere */
+.notification-success {
+  @apply bg-green-500 text-white p-4 rounded-lg flex items-center shadow-lg;
+  animation: fadeInSlideDown 0.3s ease-out forwards;
+}
+
+.notification-error {
+  @apply bg-red-500 text-white p-4 rounded-lg flex items-start shadow-lg;
+  animation: fadeInSlideDown 0.3s ease-out forwards;
+}
+
+.notification-icon {
+  @apply mr-2 flex-shrink-0;
+}
+
+/* Effetti hover */
+.hover-scale {
+  @apply transition-transform duration-200 hover:scale-105;
+}
+
+.hover-glow {
+  @apply transition-all duration-200 hover:shadow-lg hover:shadow-cyan-500/20;
+}
+
+/* Input e form styling */
+.date-input {
+  background-color: rgba(252, 251, 255, 0.14);
+  color: var(--text-primary);
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  cursor: pointer;
+  filter: invert(var(--calendar-invert));
+}
+
+.date-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  background-color: rgba(252, 251, 255, 0.18);
+}
+
+/* Login specifico */
+.login-input {
+  @apply w-full p-3 rounded bg-opacity-20 border transition-all duration-200;
+  @apply focus:ring-2 focus:ring-opacity-50 focus:ring-cyan-400;
+  background-color: var(--bg-secondary);
+  border-color: var(--accent);
+}
+
+.login-button {
+  @apply relative overflow-hidden transition-all duration-300;
+}
+
+.login-button::after {
+  content: '';
+  @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+}
+
+.login-button:hover::after {
+  @apply opacity-10;
+}
+
+/* Success animation */
+.success-animation {
+  @apply fixed inset-0 flex items-center justify-center z-50;
+  background: rgba(6, 78, 59, 0.2);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.success-icon {
+  @apply text-green-500;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+/* Error animation */
+.error-message {
+  @apply bg-red-500/10 border border-red-500 text-red-500 p-3 rounded;
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Loading states */
+.loading-spinner {
+  @apply animate-spin text-cyan-400;
+}
+
+.loading-overlay {
+  @apply absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center;
+  backdrop-filter: blur(4px);
+}
+
+/* Password toggle icon styling */
+.password-toggle-icon {
+  @apply cursor-pointer text-gray-400 hover:text-gray-300 transition-colors;
+}
+
+/* Password field animation */
+.password-field-focus {
+  @apply transition-all duration-200;
+}
+
+.password-field-focus:focus-within {
+  @apply ring-2 ring-opacity-50 ring-cyan-400;
+}
+
+/* Hero Section Enhancement */
+.hero-image {
+  @apply absolute inset-0 bg-cover bg-center bg-no-repeat z-0;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: scale(1.05);
+  transition: all 0.5s ease;
+  filter: brightness(0.85) contrast(1.1);
+  will-change: transform, filter;
+}
+
+.hero-overlay-dark {
+  @apply absolute inset-0 bg-gradient-to-b z-0 transition-opacity duration-300 ease-in-out;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0.85));
+  opacity: 1;
+}
+
+.hero-overlay-light {
+  @apply absolute inset-0 bg-gradient-to-b z-0 transition-opacity duration-300 ease-in-out;
+  background-image: linear-gradient(to bottom, rgba(0,20,40,0.8), rgba(0,20,40,0.9));
+  opacity: 0;
+}
+
+.box-shadow-vignette {
+  box-shadow: inset 0 0 150px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* Tema chiaro/scuro per hero section */
+[data-theme='light'] .hero-overlay-dark {
+  opacity: 0;
+}
+
+[data-theme='light'] .hero-overlay-light {
+  opacity: 1;
+}
+
+[data-theme='dark'] .hero-overlay-dark {
+  opacity: 1;
+}
+
+[data-theme='dark'] .hero-overlay-light {
+  opacity: 0;
+}
+
+/* Text enhancement */
+.text-enhanced {
+  @apply text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-wide;
+  text-rendering: optimizeLegibility;
+}
+
+.text-accent-glow {
+  @apply text-[var(--accent)] drop-shadow-[0_0_16px_rgba(29,203,235,0.3)] tracking-wide;
+  text-rendering: optimizeLegibility;
+}
+
+/* Button enhancement */
+.button-enhanced {
+  @apply inline-block bg-[var(--accent)] hover:bg-opacity-90 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300;
+  box-shadow: 0 4px 14px rgba(29,203,235,0.4);
+}
+
+.button-enhanced:hover {
+  box-shadow: 0 6px 20px rgba(29,203,235,0.6);
+  transform: translateY(-2px);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+[data-theme='light'] {
+  --calendar-invert: 0;
+}
+
+[data-theme='dark'] {
+  --calendar-invert: 1;
+}
+
+/* Stabilizzare l'output del rendering per prevenire flickering */
+.stabilize-render {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  will-change: auto;
+  contain: content;
+}
+
+/* Prevenzione di layout shifts */
+.content-stable {
+  min-height: 100vh;
+  isolation: isolate;
+  position: relative;
+}
+
+/* Fix per evitare sfarfallio nelle animazioni sui vari browser */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .stabilize-render {
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+  }
+}
+
+@supports (-moz-appearance:none) {
+  .stabilize-render {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Miglioramento immagini ad alta risoluzione */
+.high-quality-image {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Prevenire problemi di TILT (sfarfallio continuo) */
+.prevent-tilt {
+  transform: translateZ(0);
+  min-height: calc(100vh - 4rem);
+  animation-fill-mode: both;
+  transform-style: preserve-3d;
+  contain: layout style paint;
+}
+
+/* Miglioramenti per la tab UI nei pannelli */
+.tab-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.tab-button.active::after {
+  transform: scaleX(1);
+}
+
+/* Pannelli amministrativi */
+.admin-panel-container,
+.panel-container {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  will-change: transform, opacity;
+}
+
+/* Rimuovi scrollbar nelle liste orizzontali ma mantieni la funzionalità */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Effetto 3D per pulsanti */
+.button-3d {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s;
+}
+
+.button-3d:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(50, 50, 93, 0.11), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+/* Fix per le icone nei cerchi dei servizi */
+.service-icon-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: rgba(var(--accent-rgb), 0.1);
+}
+
+.service-icon {
+  color: var(--accent) !important;
+  fill: var(--accent) !important;
+  stroke: var(--accent) !important;
+}
+
+/* Fix per il testo nella card CTA */
+.cta-text {
+  color: white !important;
+}
+
+.cta-button {
+  color: var(--accent) !important;
+}
+
+[data-theme='light'] .cta-button {
+  color: var(--accent) !important;
+}
+
+[data-theme='dark'] .cta-button {
+  color: var(--accent) !important;
+}
+
+/* Fix per le icone nei contatti */
+.contact-icon-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.contact-icon {
+  color: var(--accent) !important;
+}
+
+/* Assicura la visibilità delle icone SVG in entrambi i temi */
+svg.icon {
+  fill: currentColor;
+  stroke: currentColor;
+  color: inherit;
+}
+
+/* Aggiungi variabili RGB per l'accent color */
+:root {
+  --accent-rgb: 29, 203, 235;
+}
+
+[data-theme='light'] {
+  --accent-rgb: 29, 165, 192;
+}
+
+/* Fix avanzato per le icone nei cerchi dei contatti */
+.contact-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background-color: var(--accent);
+  margin-right: 1rem;
+}
+
+.contact-icon-wrapper svg {
+  color: white !important;
+  fill: none !important;
+  stroke: white !important;
+  stroke-width: 2.5 !important;
+  width: 24px !important;
+  height: 24px !important;
+  z-index: 2;
+}
+
+/* Fix avanzato per le icone nei cerchi dei servizi */
+.service-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  background-color: var(--accent);
+  margin-right: 0.75rem;
+}
+
+.service-icon-wrapper svg {
+  color: white !important;
+  fill: none !important;
+  stroke: white !important;
+  stroke-width: 2 !important;
+  width: 32px !important;
+  height: 32px !important;
+  z-index: 2;
+}
+
+/* Assicura che le icone siano sempre visibili, indipendentemente dal tema */
+[data-theme='light'] .contact-icon-wrapper svg,
+[data-theme='dark'] .contact-icon-wrapper svg,
+[data-theme='light'] .service-icon-wrapper svg,
+[data-theme='dark'] .service-icon-wrapper svg {
+  color: white !important;
+  stroke: white !important;
+}
+
+/* Stile alternativo con contorno accentuato per icone più visibili */
+.icon-outline {
+  stroke: var(--accent) !important;
+  stroke-width: 2 !important;
+  color: var(--accent) !important;
+  fill: none !important;
+}
+
+/* Stile alternativo per i pulsanti CTA in temi chiari/scuri */
+.cta-card {
+  background: linear-gradient(to bottom right, var(--accent), var(--accent-dark));
+  color: white !important;
+}
+
+.cta-button {
+  background-color: white !important;
+  color: var(--accent) !important;
+}
+
+[data-theme='light'] .cta-button {
+  box-shadow: 0 4px 6px rgba(29, 165, 192, 0.25) !important;
+}
+
+[data-theme='dark'] .cta-button {
+  box-shadow: 0 4px 6px rgba(29, 203, 235, 0.25) !important;
+}
+
+/* Effetti hover migliorati */
+.contact-icon-wrapper:hover svg,
+.service-icon-wrapper:hover svg {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+/* Transizione smooth per tutte le icone */
+svg {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Definizione variabili RGB per l'accent color */
+:root {
+  --accent-rgb: 29, 203, 235;
+  --accent-dark: #1a97b3;
+}
+
+[data-theme='light'] {
+  --accent-rgb: 29, 165, 192;
+  --accent-dark: #157c92;
+}
+
+/* Classe per icone bianche nei cerchi */
+.icon-white {
+  color: white !important;
+  fill: none !important;
+  stroke: white !important;
+  stroke-width: 2 !important;
+  z-index: 5 !important;
+}
+
+/* Wrapper migliorato per le icone */
+.service-icon-wrapper {
+  position: relative !important;
+  width: 48px !important;
+  height: 48px !important;
+  background-color: var(--accent) !important;
+  border-radius: 9999px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 8px rgba(var(--accent-rgb), 0.4) !important;
+}
+
+/* Effetti hover per le icone */
+.service-icon-wrapper:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 3px 10px rgba(var(--accent-rgb), 0.6) !important;
+}
+
+/* Stile per la card CTA */
+.cta-card {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark)) !important;
+}
+
+.cta-card h3,
+.cta-card p {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.cta-button {
+  color: var(--accent) !important;
+  background-color: white !important;
+  font-weight: bold !important;
+}
+
+[data-theme='light'] .cta-button {
+  color: var(--accent) !important;
+}
+
+[data-theme='dark'] .cta-button {
+  color: var(--accent) !important;
+}
+
+/* Animazione per i cerchi di icone */
+@keyframes pulse-light {
+  0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(var(--accent-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
+}
+
+.service-icon-wrapper:hover {
+  animation: pulse-light 1.5s infinite;
+}
+
+.animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
+.animate-scaleIn { animation: scaleIn 0.3s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes pulse-subtle { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.2; } }
+
+/* Animazioni di base per i form modali */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s ease-in-out;
+}
+
+.animate-pulse {
+  animation: pulse-subtle 2s infinite;
+}
+
+.animate-pulse.delay-300 {
+  animation-delay: 300ms;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Keyframes per le animazioni */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animazioni per le sezioni della pagina */
+.features-section,
+.benefits-section,
+.roi-section,
+.testimonials-section,
+.pricing-section {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Transizioni sui bottoni e card */
+button,
+.service-card,
+.bg-white {
+  transition: all 0.3s ease;
+}
+
+/* Animazione per il messaggio di successo */
+.success-checkmark {
+  animation: checkmark 0.5s ease-in-out 0.7s both;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
+.animate-scaleIn { animation: scaleIn 0.3s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes pulse-subtle { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.2; } }

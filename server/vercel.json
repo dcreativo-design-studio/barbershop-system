@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.js"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/appointments/public/cron-reminder?apiKey=9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+      "schedule": "0 7 * * *"
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "https://api.barbershop.dcreativo.ch"
+  }
+}
