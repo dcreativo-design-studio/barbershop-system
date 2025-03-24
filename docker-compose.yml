@@ -17,7 +17,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_URL=https://api.barbershop.dcreativo.ch
+      - VITE_API_URL=https://api.yourstyle.dcreativo.ch
     depends_on:
       - server
 
@@ -26,10 +26,10 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGODB_URI=mongodb://127.0.0.1:27017/yourstylebarber
-      - JWT_SECRET=fc5f7d7fa59f5bafe2fa79fe2414142665ab6e3b2c0df2dabc860cbfc172699e
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_PORT=465
-      - SMTP_USER=timm81379@gmail.com
-      - SMTP_PASSWORD=bkzq fzwd jegt gvwy
-      - BARBER_EMAIL=info@dcreativo.ch
+    - MONGODB_URI=${MONGODB_URI}
+    - JWT_SECRET=${JWT_SECRET}
+    - SMTP_USER=${SMTP_USER}
+    - SMTP_PASSWORD=${SMTP_PASSWORD}
+    - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+    - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+    - TWILIO_PHONE_NUMBER=${TWILIO_PHONE_NUMBER}
